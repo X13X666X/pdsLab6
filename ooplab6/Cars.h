@@ -1,63 +1,33 @@
-#pragma once
-#include <iostream>
+#ifndef CAR_H
+#define CAR_H
+
 #include <string>
 using namespace std;
 
-class Lorry {
-public:
-    class Car {
-    private:
-        string brand;
-        int cylinders;
-        double power;
-        static int carCount;
-    public:
-        Car();
-        Car(string brand, int cylinders, double power);
-        Car(const Car& other);
-        ~Car();
-
-        string getBrand() const;
-        int getCylinders() const;
-        double getPower() const;
-
-        void setBrand(string brand);
-        void setCylinders(int cylinders);
-        void setPower(double power);
-
-        Car& operator=(const Car& other);
-        void changePower(double newPower);
-        operator string() const;
-
-        void input();
-        void display() const;
-
-        static int getCarCount();
-    };
-
+class Car {
 private:
-    Car car;
-    double capacity;
-    static int lorryCount;
+    string brand;
+    int cylinders;
+    int power;
 
 public:
-    Lorry();
-    Lorry(Car car, double capacity);
-    Lorry(const Lorry& other);
-    ~Lorry();
+    Car();
+    Car(string b, int c, int p);
+    Car(const Car& other);
 
-    Car getCar() const;
-    double getCapacity() const;
+    void setBrand(string b);
+    void setCylinders(int c);
+    void setPower(int p);
 
-    void setCar(Car car);
-    void setCapacity(double capacity);
+    string getBrand() const;
+    int getCylinders() const;
+    int getPower() const;
 
-    Lorry& operator=(const Lorry& other);
-    void changeCapacity(double newCapacity);
-    operator string() const;
-
+    void changePower(int newPower);
     void input();
-    void display() const;
+    void print() const;
 
-    static int getLorryCount();
+    operator string() const;
 };
+
+#endif
