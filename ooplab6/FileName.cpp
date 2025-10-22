@@ -1,34 +1,38 @@
-#include "Cars.h"
+#include <iostream>
+#include "Lorry.h"
 using namespace std;
 
 int main() {
-    Lorry::Car c1;
-    c1.display();
+    cout << "=== Car demo ===\n";
+    Car car1("Toyota", 4, 150);
+    Car car2;
+    car2.input();
 
-    Lorry::Car c2("BMW", 6, 320);
-    c2.display();
+    cout << "\nCar 1:\n"; car1.print();
+    cout << "\nCar 2:\n"; car2.print();
 
-    Lorry::Car c3 = c2;
-    c3.changePower(400);
-    c3.display();
+    cout << "\nChanging power of Car 1 to 180...\n";
+    car1.changePower(180);
+    car1.print();
 
-    Lorry l1(c3, 1200);
-    l1.display();
-    l1.changeCapacity(2000);
-    l1.display();
+    cout << "\nString conversion:\n" << string(car1) << "\n";
 
-    Lorry l2;
-    l2.input();
-    l2.display();
+    cout << "\n=== Lorry demo ===\n";
+    Lorry lorry1(car1, 12.5);
+    Lorry lorry2;
+    lorry2.input();
 
-    Lorry trucks[2] = { l1, l2 };
-    for (int i = 0; i < 2; i++) {
-        trucks[i].display();
-    }
+    cout << "\nLorry 1:\n"; lorry1.print();
+    cout << "\nLorry 2:\n"; lorry2.print();
 
+    cout << "\nChanging Lorry 1 brand to Volvo and capacity to 15...\n";
+    lorry1.changeBrand("Volvo");
+    lorry1.changeCapacity(15);
 
-    cout << "\nCars created: " << Lorry::Car::getCarCount() << endl;
-    cout << "Lorries created: " << Lorry::getLorryCount() << endl;
+    cout << "\nUpdated Lorry 1:\n";
+    lorry1.print();
+
+    cout << "\nString conversion:\n" << string(lorry1) << "\n";
 
     return 0;
 }
