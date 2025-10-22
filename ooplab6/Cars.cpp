@@ -1,117 +1,56 @@
-#include "Cars.h"
+#include "Car.h"
+#include <iostream>
+#include <sstream>
 using namespace std;
 
-int Lorry::Car::carCount = 0;
-int Lorry::lorryCount = 0;
-
-Lorry::Car::Car() {
+Car::Car() {
     brand = "Unknown";
     cylinders = 0;
-    power = 0.0;
-    carCount++;
+    power = 0;
 }
 
-Lorry::Car::Car(string b, int c, double p) {
+Car::Car(string b, int c, int p) {
     brand = b;
     cylinders = c;
     power = p;
-    carCount++;
 }
 
-Lorry::Car::Car(const Car& other) {
+Car::Car(const Car& other) {
     brand = other.brand;
     cylinders = other.cylinders;
     power = other.power;
-    carCount++;
 }
 
-Lorry::Car::~Car() {
-    carCount--;
+void Car::setBrand(string b) { brand = b; }
+void Car::setCylinders(int c) { cylinders = c; }
+void Car::setPower(int p) { power = p; }
+
+string Car::getBrand() const { return brand; }
+int Car::getCylinders() const { return cylinders; }
+int Car::getPower() const { return power; }
+
+void Car::changePower(int newPower) {
+    power = newPower;
 }
 
-
-string Lorry::Car::getBrand() const { return brand; }
-int Lorry::Car::getCylinders() const { return cylinders; }
-double Lorry::Car::getPower() const { return power; }
-
-void Lorry::Car::setBrand(string b) { brand = b; }
-void Lorry::Car::setCylinders(int c) { cylinders = c; }
-void Lorry::Car::setPower(double p) { power = p; }
-
-Lorry::Car& Lorry::Car::operator=(const Car& other) {
-    if (this != &other) {
-        brand = other.brand;
-        cylinders = other.cylinders;
-        power = other.power;
-    }
-    return *this;
-}
-
-void Lorry::Car::changePower(double newPower) { power = newPower; }
-
-Lorry::Car::operator string() const {
-    return "Car: " + brand + ", Cylinders: " + to_string(cylinders) + ", Power: " + to_string(power);
-}
-
-void Lorry::Car::input() {
+void Car::input() {
     cout << "Enter car brand: ";
-    cin >> brand;
-    cout << "Enter cylinders: ";
+    getline(cin, brand);
+    cout << "Enter number of cylinders: ";
     cin >> cylinders;
     cout << "Enter power: ";
     cin >> power;
+    cin.ignore();
 }
 
-void Lorry::Car::display() const { cout << (string)(*this) << endl; }
-int Lorry::Car::getCarCount() { return carCount; }
-
-Lorry::Lorry() {
-    car = Car();
-    capacity = 0.0;
-    lorryCount++;
+void Car::print() const {
+    cout << "Car brand: " << brand
+         << "\nCylinders: " << cylinders
+         << "\nPower: " << power << " hp\n";
 }
 
-Lorry::Lorry(Car c, double cap) {
-    car = c;
-    capacity = cap;
-    lorryCount++;
+Car::operator string() const {
+    ostringstream oss;
+    oss << "Brand: " << brand << ", Cylinders: " << cylinders << ", Power: " << power << " hp";
+    return oss.str();
 }
-
-Lorry::Lorry(const Lorry& other) {
-    car = other.car;
-    capacity = other.capacity;
-    lorryCount++;
-}
-
-Lorry::~Lorry() {
-    lorryCount--;
-}
-
-
-Lorry::Car Lorry::getCar() const { return car; }
-double Lorry::getCapacity() const { return capacity; }
-
-void Lorry::setCar(Car c) { car = c; }
-void Lorry::setCapacity(double cap) { capacity = cap; }
-
-Lorry& Lorry::operator=(const Lorry& other) {
-    if (this != &other) {
-        car = other.car;
-        capacity = other.capacity;
-    }
-    return *this;
-}
-
-void Lorry::changeCapacity(double newCapacity) { capacity = newCapacity; }
-
-Lorry::operator string() const { return (string)car + ", Capacity: " + to_string(capacity); }
-
-void Lorry::input() {
-    cout << "Enter lorry info:\n";
-    car.input();
-    cout << "Enter capacity: ";
-    cin >> capacity;
-}
-
-void Lorry::display() const { cout << (string)(*this) << endl; }
-int Lorry::getLorryCount() { return lorryCount; }
